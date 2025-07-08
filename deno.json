@@ -1,0 +1,12 @@
+{
+  "nodeModulesDir": "auto",
+  "tasks": {
+    "dev": "deno run --allow-net --allow-env --allow-sys --allow-ffi --allow-import --watch src/main.ts",
+    "run": "deno run --allow-net --allow-env --allow-sys --allow-ffi --allow-import src/main.ts"
+  },
+  "imports": {
+    "~/": "./",
+    "sharp": "npm:sharp@^0.34.2",
+    "saihex/pretty_logs": "https://s3.saihex.com/deno-libs/pretty_logs.ts"
+  }
+}

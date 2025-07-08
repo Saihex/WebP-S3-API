@@ -1,0 +1,14 @@
+services:
+  webps3-api:
+    build: .
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    environment:
+      - s3endpoint=https://s3.saihex.com
+      - allowedPathRegex=^public/.*
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
