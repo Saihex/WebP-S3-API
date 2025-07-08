@@ -49,7 +49,11 @@ That points to the path of the file in your S3 bucket (or static media host).
 > Set `allowedPathRegex = ^public/.*` to only allow assets from the `public/` prefix.  
 > Useful if your storage is internal and the API acts as a public-facing filter.
 
-No magic, no middle-layer SDK wrappers — just raw fetches and direct WebP **transition— I mean, transformation...** Isn’t that the same thing...? 🏳️‍⚧️
+No magic, no middle-layer SDK wrappers — just raw fetches and direct WebP **transition— I mean, transformation...**  
+Isn’t that the same thing...? 🏳️‍⚧️
+
+> 🫥 **Note:** The only exception is `/health`, which is reserved for Docker Compose health checks.  
+> Don’t expect it to return WebP… unless you're into that kind of diagnostic kink.
 
 ---
 
@@ -88,3 +92,7 @@ Fast, simple, effective — **like a caffeinated fox handling your image assets*
 
 Built by Saihex Studios for internal use, but shared with you because we're nice like that.  
 **Meow~ 🦊**
+
+---
+
+*This README was co-written with ChatGPT because I value my time, and I’m not about to manually write markdown like some kind of productivity war criminal. Transparency-first*
