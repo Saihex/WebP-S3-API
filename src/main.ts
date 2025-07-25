@@ -11,7 +11,26 @@ const allowedTypes = [
 
 const lossless_types = ["image/png", "image/svg+xml", "image/webp"];
 
-const allowedPathRegex = Deno.env.get("allowedPathRegex") ?? "public/*";
+function readPathRegex(): RegExp[] {
+  const raw = Deno.env.get("allowedPathRegex");
+  const err = new Error("INVALID ALLOWED PATH REGEX PROVIDED!");
+
+  if (!raw) return [new RegExp("^public/.*")];
+
+  try {
+    const parsed = JSON.parse(raw);
+
+    if (!Array.isArray(parsed) || !parsed.every(item => typeof item === "string")) {
+      throw err;
+    }
+
+    return parsed.map(pattern => new RegExp(pattern));
+  } catch (_) {
+    throw err;
+  }
+}
+
+const allowedPathRegex = readPathRegex();
 const s3Endpoint = Deno.env.get("s3endpoint");
 
 if (s3Endpoint == undefined) {
@@ -59,13 +78,12 @@ async function serveHandler(req: Request): Promise<Response> {
   }
 
   const desiredFile = fullURL.searchParams.get("src");
-  const pathRegex = new RegExp(allowedPathRegex);
 
   if (desiredFile == null) {
     return new Response("missing 'src' parameter", { status: 400 });
   }
 
-  if (!pathRegex.test(desiredFile)) {
+  if (!allowedPathRegex.some(rx => rx.test(desiredFile))) {
     pretty_print.logWarning(`[webpS3] Blocked src: ${desiredFile}`);
     return new Response(null, { status: 403 });
   }

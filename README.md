@@ -43,11 +43,11 @@ That points to the path of the file in your S3 bucket (or static media host).
 ### 🔧 Configuration (via compose.yaml)
 
 - `s3endpoint`: Set this to your S3-compatible URL (e.g. MinIO endpoint)
-- `allowedPathRegex`: A regex pattern to limit what paths are accepted
+- `allowedPathRegex`: A **JSON array of regex strings** that restrict which object paths are allowed for fetching.
 
 > 🧠 **Example:**  
-> Set `allowedPathRegex = ^public/.*` to only allow assets from the `public/` prefix.  
-> Useful if your storage is internal and the API acts as a public-facing filter.
+> Set `allowedPathRegex = ["^public/.*", "^assets/.*"]` to allow only paths starting with `public/` or `assets/`.  
+> Useful when your storage contains internal assets you want to block from public access.
 
 No magic, no middle-layer SDK wrappers — just raw fetches and direct WebP **transition— I mean, transformation...**  
 Isn’t that the same thing...? 🏳️‍⚧️
