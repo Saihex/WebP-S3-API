@@ -1,5 +1,13 @@
 # 🌀 Saihex Studios' WebP S3 API
 
+---
+
+<div align="center">
+  <img width="512" alt="SaihexWare Collection Logo" src="https://s3.saihex.com/public/logos/saihexware.svg"/>
+</div>
+
+---
+
 **A tiny, nimble Deno-powered API** that connects to any S3-compatible storage and delivers **WebP conversions on the fly** — because modern formats deserve modern delivery.
 
 ---

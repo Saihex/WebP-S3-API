@@ -1,3 +1,5 @@
 node_modules
 deno.lock
 .gitignore
+Dockerfile
+compose.yaml
